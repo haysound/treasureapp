@@ -64,7 +64,10 @@ foreach ($result as $value) {
     //execute only once
     break;
 }
-
+$previous = "javascript:history.go(-1)";
+if(isset($_SERVER['HTTP_REFERER'])) {
+    $previous = $_SERVER['HTTP_REFERER'];
+}
 
 include_once 'includes/header.php';
 ?>
@@ -76,7 +79,8 @@ include_once 'includes/header.php';
         </div>
         <div class="col-lg-6" style="">
             <div class="page-action-links text-right">
-            <a href="add_admin.php"> <button class="btn btn-success">Add new</button></a>
+                <a href="<?= $previous ?>"> <button class="btn btn-success">Back</button></a>
+                <a href="add_admin.php"> <button class="btn btn-success">Add new</button></a>
             </div>
         </div>
 </div>

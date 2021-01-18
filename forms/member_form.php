@@ -118,7 +118,7 @@
 
     <div class="form-group col-sm-2">
         <label>LGA of Origin</label>
-          <?
+          <?php
                 $db = getDbInstance();
                 $select = "LocalName";
                 //$db->where("StateCode", $_POST['state_id']);

@@ -82,8 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !is_ajax()) {
 			// Redirect user
 			header('Location:verify_user_with_token.php');
 
-
-
 		} else {
 			$_SESSION['login_failure'] = "Invalid user name or password";
 			header('Location:login.php');

@@ -25,41 +25,44 @@ if ($db->count >= 1) {
     $admin_name = $row[0]["firstname"];
 }
 
-if(isset($_POST['generate_token'])) {
-    $db = getDbInstance();
-    $db->where("created_for", $_SESSION['username']);
-    $row = $db->get('cashiers_login_tokens');
-
-    $token = substr(random_int(100000, 999999), 1);
-    $time= time();
-    $pretty_time = date('Y-m-d H:i:s');
-    $time = time();
-    $_SESSION['time'] = $time;
-    if ($db->count>=1) {
-
-        $data = Array (
-            "token"            => $token,
-            "date_created_raw"              => $time,
-            "date_created_pretty"           => $pretty_time,
-            "created_for"       => $_SESSION['username']
-        );
-
+function generate_token(){
+    //if(isset($_POST['generate_token'])) {
         $db = getDbInstance();
         $db->where("created_for", $_SESSION['username']);
-        $result = $db->update("cashiers_login_tokens", $data);
-        send_token_to_phone_and_email();
-    } else {
-        $data = Array (
-            "token"                 => $token,
-            "date_created_raw"      => $time,
-            "date_created_pretty"   => $pretty_time,
-            "created_for"           => $_SESSION['username']
-        );
+        $row = $db->get('cashiers_login_tokens');
 
-        $db = getDbInstance();
-        $result = $db->insert("cashiers_login_tokens", $data);
-        send_token_to_phone_and_email();
-    }
+        $token = substr(random_int(100000, 999999), 1);
+        $time= time();
+        $pretty_time = date('Y-m-d H:i:s');
+        $time = time();
+        $_SESSION['time'] = $time;
+        if ($db->count>=1) {
+
+            $data = Array (
+                "token"            => $token,
+                "date_created_raw"              => $time,
+                "date_created_pretty"           => $pretty_time,
+                "created_for"       => $_SESSION['username']
+            );
+
+            $db = getDbInstance();
+            $db->where("created_for", $_SESSION['username']);
+            $result = $db->update("cashiers_login_tokens", $data);
+            send_token_to_phone_and_email();
+        }
+        else {
+            $data = Array (
+                "token"                 => $token,
+                "date_created_raw"      => $time,
+                "date_created_pretty"   => $pretty_time,
+                "created_for"           => $_SESSION['username']
+            );
+
+            $db = getDbInstance();
+            $result = $db->insert("cashiers_login_tokens", $data);
+            send_token_to_phone_and_email();
+        }
+    //}
 }
 
 function send_token_to_phone_and_email() {
@@ -77,12 +80,12 @@ function send_token_to_phone_and_email() {
         if ($db->count>=1) {
 
             $the_user = $row[0];
-            // send_sms_to_phone('cashier_token', $the_user['phone'], $the_message);
-            // mail(
-            //     $the_user['email'],
-            //     'Surulere Treasury Verification Token!',
-            //     $the_message
-            // );
+//             send_sms_to_phone('cashier_token', $the_user['phone'], $the_message);
+//             mail(
+//                 $the_user['email'],
+//                 'Surulere Treasury Verification Token!',
+//                 $the_message
+//             );
             $_SESSION['dtkn'] = $the_token;
             if (isset($_SESSION['dtkn'])) {
                 echo $_SESSION['dtkn'];
@@ -134,7 +137,19 @@ function setSessionAndGoToIndexPage($day_ended=false) {
     $row = $db->get('start_and_end_day_controller');
     $_SESSION['present_day_ongoing'] = !$day_ended ? true : "true(But Ended)";
     $_SESSION['day_id'] = !$day_ended ? $row[0]['day_id'] : $row[0]['day_id']."(Ended)";
-    $day_ended==false ? header("Location: index.php") : header("Location: index.php?dayended=true");
+    if ($day_ended==false && $_SESSION['admin_type']==='supercashr'){
+        header("Location: super_index.php");
+    }
+    elseif ($day_ended==false && $_SESSION['admin_type']==='cashier'){
+        header("Location: index.php");
+    }
+    elseif ($day_ended==false && $_SESSION['admin_type']==='admin'){
+        header("Location: admin_index.php");
+    }
+    else{
+        header("Location: index.php?dayended=true");
+    }
+//    $day_ended==false ? header("Location: index.php") : header("Location: index.php?dayended=true");
 }
 
 function saveInfoToStartDayController($the_day_id) {

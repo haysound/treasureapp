@@ -46,7 +46,7 @@
             </div>
 
             <!-- Navigation -->
-            <?php if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true ): ?>
+            <?php if (isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] == true && $_SESSION['admin_type']==='cashier'): ?>
                 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -56,23 +56,19 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a href="#">
-                        <div class="logo-container">
-            <div class="logo">
-                <img src="assets/img/logo_sm.png">
-            </div>
-            <div class="brand">
-            Main Church Application
-            </div>
-        </div>
-
+                            <div class="logo-container">
+                            <div class="logo">
+                                <img src="assets/img/logo_sm.png">
+                            </div>
+                            <div class="brand">
+                            Main Church Application
+                            </div>
+                        </div>
                         </a>
-
                     </div>
                     <!-- /.navbar-header -->
-
                     <ul class="nav navbar-top-links navbar-right">
                         <!-- /.dropdown -->
-
                         <!-- /.dropdown -->
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -92,87 +88,62 @@
                         <!-- /.dropdown -->
                     </ul>
                     <!-- /.navbar-top-links -->
-
                     <div class="navbar-default sidebar" role="navigation">
                         <div class="sidebar-nav navbar-collapse">
                             <ul class="nav" id="side-menu">
                                 <li>
                                     <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                                 </li>
-
                                 <li <?php echo (CURRENT_PAGE == "members.php" || CURRENT_PAGE == "add_member.php") ? 'class="active"' : ''; ?>>
                                     <a href="#"><i class="fa fa-user-circle fa-fw"></i> Members<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li>
                                             <a href="members.php"><i class="fa fa-list fa-fw"></i>List all</a>
                                         </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="add_member.php"><i class="fa fa-plus fa-fw"></i>Add New</a>
+                                </li>
+                                <?php
+                                    // If Day has ended, hide the income navigations
+                                    $db = getDbInstance();
+                                    $db->where("day", date('Y-m-d'));
+                                    $db->where("day_ended", true);
+                                    $db->where("day_ended_for", $_SESSION["username"]);
+                                    $row = $db->get('start_and_end_day_controller');
+                                    if ($db->count ===0) {?>
                                     <li>
-                                        <a href="add_member.php"><i class="fa fa-plus fa-fw"></i>Add New</a>
+                                        <a href="#"><i class="fa fa-money"></i> Income<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="#"><i class="fa fa-money"></i> Tithe<span class="fa arrow"></span></a>
+                                                <ul class="nav nav-second-level">
+                                                    <li>
+                                                        <a href="add_tithe.php"><i class="fa fa-credit-card"></i> Post Tithe</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="reverse_tithe.php"><i class="fa fa-undo"></i> Tithe Reversal</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="daily_transact_grid.php"><i class="fa fa-eye"></i> View Transactions</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="reprint_tithe.php"><i class="fa fa-search"></i> Search Receipt(s)</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-line-chart"></i> Reports </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fa fa-eye"></i> Other Incomes</a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    </ul>
-                                </li>
-                                <?php
-                                // If Day has ended, hide the income navigations
-                                $db = getDbInstance();
-                                $db->where("day", date('Y-m-d'));
-                                $db->where("day_ended", true);
-                                $db->where("day_ended_for", $_SESSION["username"]);
-                                $row = $db->get('start_and_end_day_controller');
-                                if ($db->count ===0) {
+                                    <?php
+                                        } //End of day closing if statement
                                 ?>
-                                <li>
-                                    <a href="#"><i class="fa fa-money"></i> Income<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="#"><i class="fa fa-credit-card"></i> Band Savings</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-undo"></i> Evangelism</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-gavel"></i> Tithe of Tithe</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#"><i class="fa fa-money"></i> Tithe<span class="fa arrow"></span></a>
-                                            <ul class="nav nav-second-level">
-                                                <li>
-                                                    <a href="add_tithe.php"><i class="fa fa-credit-card"></i> Post Tithe</a>
-                                                </li>
-                                                <li>
-                                                    <a href="reverse_tithe.php"><i class="fa fa-undo"></i> Tithe Reversal</a>
-                                                </li>
-                                                <li>
-                                                    <a href="reversal_transact_grid.php"><i class="fa fa-gavel"></i> Approve Tithe Reversal</a>
-                                                </li>
-                                                <li>
-                                                    <a href="daily_transact_grid.php"><i class="fa fa-eye"></i> View Transactions</a>
-                                                </li>
-                                                <li>
-                                                    <a href="reprint_tithe.php"><i class="fa fa-search"></i> Search Receipt(s)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="assign_receipt_book.php"><i class="fa fa-exchange"></i> Assign Receipt(s)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa fa-line-chart"></i> Reports </a>
-                                                </li>
-                                                <li>
-                                                    <a href="printer_setup.php"><i class="fa fa-wrench"></i> Setup Printer</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-eye"></i> Other Incomes</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <?php
-                                    } //End of day closing if statement
-                                ?>
-                                <li>
-                                    <a href="admin_users.php"><i class="fa fa-users fa-fw"></i> Users</a>
-                                </li>
                                 <li class="end-the-day">
                                     <p class="end-or-start-day">
                                         <i class="fa fa-hourglass-end"></i> End the Day
