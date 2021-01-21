@@ -15,15 +15,17 @@ require_once BASE_PATH . '/helpers/helpers.php';
 | DATABASE CONFIGURATION
 |--------------------------------------------------------------------------
  */
-
 define('DB_HOST', "localhost");
-define('DB_USER', "root");
-define('DB_PASSWORD', "");
-define('DB_NAME', "churchadmin");
+define('DB_USER', "DevUser");
+define('DB_PASSWORD', "root@2020");
+define('DB_NAME', "admincore");
 
-/**
- * Get instance of DB object
- */
-function getDbInstance() {
-	return new MysqliDb(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+// define('DB_HOST', "localhost");
+// define('DB_USER', "root");
+// define('DB_PASSWORD', "");
+// define('DB_NAME', "churchadmin");
+
+function getDbInstance()
+{
+    return new MysqliDb(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 }
