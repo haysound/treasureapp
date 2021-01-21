@@ -80,12 +80,12 @@ function send_token_to_phone_and_email() {
         if ($db->count>=1) {
 
             $the_user = $row[0];
-//             send_sms_to_phone('cashier_token', $the_user['phone'], $the_message);
-//             mail(
-//                 $the_user['email'],
-//                 'Surulere Treasury Verification Token!',
-//                 $the_message
-//             );
+             send_sms_to_phone('cashier_token', $the_user['phone'], $the_message);
+             mail(
+                 $the_user['email'],
+                 'Surulere Treasury Verification Token!',
+                 $the_message
+             );
             $_SESSION['dtkn'] = $the_token;
             if (isset($_SESSION['dtkn'])) {
                 echo $_SESSION['dtkn'];
