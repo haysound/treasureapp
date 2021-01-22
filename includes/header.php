@@ -100,11 +100,12 @@
                                         <li>
                                             <a href="members.php"><i class="fa fa-list fa-fw"></i>List all</a>
                                         </li>
+                                        <li>
+                                            <a href="add_member.php"><i class="fa fa-plus fa-fw"></i>Add New</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="add_member.php"><i class="fa fa-plus fa-fw"></i>Add New</a>
-                                </li>
+
                                 <?php
                                     // If Day has ended, hide the income navigations
                                     $db = getDbInstance();
@@ -116,6 +117,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-money"></i> Income<span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="insurance.php"><i class="fa fa-money"></i> Insurance</a>
+                                            </li>
                                             <li>
                                                 <a href="#"><i class="fa fa-money"></i> Tithe<span class="fa arrow"></span></a>
                                                 <ul class="nav nav-second-level">
@@ -137,7 +141,7 @@
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href="#"><i class="fa fa-eye"></i> Other Incomes</a>
+                                                <a href="other_payment.php"><i class="fa fa-money"></i> Other Payments</a>
                                             </li>
                                         </ul>
                                     </li>
