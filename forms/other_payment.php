@@ -38,6 +38,7 @@ $qnt = array('1kqty'=>'1kqty_bal', '5hqty'=>'5hqty_bal', '2hqty'=>'2hqty_bal', '
                     <?php endforeach; endif; ?>
             </select>
         </div>
+        <h3 id="test"></h3>
         <div class="form-group col-md-6">
             <label class="control-label " for="other_payment_sub">Other Payment Sub</label>
             <select class="form-control" id="other_payment_sub" name="other_payment_sub" >

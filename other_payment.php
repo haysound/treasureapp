@@ -259,30 +259,29 @@ require_once 'includes/header.php';
 
     $(document).on("change", "#other_payment", function(e){
         e.preventDefault();
-        let other_payment = $("#other_payment").val();
-        $.ajax({
-            url: "auto.php",
-            type: "post",
-            dataType: "json",
-            data: {
-                other_payment: other_payment
-            },
-            success: function(data){
-                let other_payment_sub = "";
-                other_payment_sub ="<option value='select'>Select Payment Sub</option>";
-                data = JSON.parse(data);
-                console.log(data);
-                data.forEach(function(element){
-                    console.log(element);
-                });
-                // for( let key in data){
-                //     console.log(data[key]['ChartNote']);
-                //     //other_payment_sub = "<option value="+ data[key]['RecID'] +">"+ data[key]['ChartNote'] +"</option>";
-                //
-                // }
-                $("#other_payment_sub").html(other_payment_sub);
-            }
-        });
+        try{
+            let other_payment = $("#other_payment").val();
+            $.ajax({
+                url: "auto.php",
+                type: "post",
+                dataType: "json",
+                data: {
+                    other_payment: other_payment
+                },
+                success: function(data){
+                    let other_payment_sub = "";
+                    other_payment_sub ="<option value='select'>Select Payment Sub</option>";
+
+                    $.each(data, function (key,value) {
+                        other_payment_sub += "<option value="+ value.ChartNoteID +">"+ value.ChartNote +"</option>";
+                    });
+                    $("#other_payment_sub").html(other_payment_sub);
+                }
+            });
+        } catch (e) {
+            
+        }
+        
     });
 </script>
 <script type="text/javascript">
