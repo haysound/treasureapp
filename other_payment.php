@@ -79,13 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
             return $NewReceiptNumbers;
         } else {
-            $_SESSION['failure'] = "Tithe Information not added due to Non-availability of Receipt Number ";
-            header('location:add_tithe.php');
+            $_SESSION['failure'] = "Payment Information not added due to Non-availability of Receipt Number ";
+            header('location:other_payment.php');
             exit();
         }
     }
-
-
 
     $GeneratedReceiptNumber = getReceiptNumber();
 
@@ -119,7 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $data_for_bal_table['TransactionCardNumber'] = $dat_to_store['TransactionCardNumber'] = $_POST['cardno'];
         if (!empty($_POST['cbankname'])) {
             $data_for_bal_table['BankName'] =  $dat_to_store['BankName'] = $_POST['cbankname'];
-        } else if (!empty($_POST['dbankname'])) {
+        }
+        else if (!empty($_POST['dbankname'])) {
             $data_for_bal_table['BankName'] =  $dat_to_store['BankName'] = $_POST['dbankname'];
         }
         $data_for_bal_table['ChequeNumber'] =  $dat_to_store['ChequeNumber'] = $_POST['chequenumber'];
@@ -150,11 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $data_to_store['memid'] = $_POST['memb_id'];
         $data_to_store['Name_member'] = $_POST['memb_name'];
         $data_to_store['branch_name'] = $_POST['memb_branch'];
-        $data_to_store['band_name'] = $_POST['memb_band'];
+        $data_to_store['band_name'] = $_POST['category'];
         $data_to_store['Amount_Paid'] = $_POST['actual-tithe'];
-        $data_to_store['Payment_Type'] = 'Tithe';
+        $data_to_store['Payment_Type'] = $_POST['other_payment_sub'];
         $data_to_store['payment_mode'] = $_POST['paymode'];
-        $data_to_store['payment_description'] = "Tithe for ". $_POST['duration'];
+        $data_to_store['payment_description'] = $_POST['other_payment_sub']. " for " . $_POST['duration'];
         $data_to_store['date_received'] = date('Y-m-d H:i:s');
         $data_to_store['date_received_no_time'] = date('Y-m-d');
         $data_to_store['recusername'] = $_SESSION['username']; //<!--assign the user in the post-->
@@ -273,7 +272,7 @@ require_once 'includes/header.php';
                     other_payment_sub ="<option value='select'>Select Payment Sub</option>";
 
                     $.each(data, function (key,value) {
-                        other_payment_sub += "<option value="+ value.ChartNoteID +">"+ value.ChartNote +"</option>";
+                        other_payment_sub += "<option value="+ value.ChartNote + ">"+ value.ChartNote +"</option>";
                     });
                     $("#other_payment_sub").html(other_payment_sub);
                 }

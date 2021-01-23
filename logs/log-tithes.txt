@@ -1787,3 +1787,19 @@ Collected in: Cash
 Collected on: Tue, Jan, 12, 2021 08:02:47: PM
 ==========================================================================================================
 ==========================================================================================================
+Tithe was COLLECTED from MARSH STELLA TITILAYO and posted by cashier, Dave Michael(thecashier)
+The details are shown below:
+Invoice Number: 0000664
+Amount Paid: 50000
+Collected in: Cash
+Collected on: Sat, Jan, 23, 2021 09:26:54: AM
+==========================================================================================================
+==========================================================================================================
+Tithe was COLLECTED from AYENI APOTI-ERI AYOMIDE and posted by cashier, Dave Michael(thecashier)
+The details are shown below:
+Invoice Number: 0000665
+Amount Paid: 20000
+Collected in: Cash
+Collected on: Sat, Jan, 23, 2021 09:51:51: AM
+==========================================================================================================
+==========================================================================================================

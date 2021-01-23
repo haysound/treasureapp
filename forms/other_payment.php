@@ -69,13 +69,10 @@ $qnt = array('1kqty'=>'1kqty_bal', '5hqty'=>'5hqty_bal', '2hqty'=>'2hqty_bal', '
         <input type="text" class="form-control" id="memb_name" name="memb_name" readonly />
     </div>
     <div class="form-group col-lg-4">
-        <label for="memb_band">Member Band:</label>
-        <input type="text" class="form-control" id="memb_band" name="memb_band" readonly />
-    </div>
-    <div class="form-group">
         <label for="memb_band">Member Branch:</label>
         <input type="text" class="form-control" id="memb_branch" name="memb_branch" readonly />
     </div>
+    <input type="hidden" class="form-control" id="memb_band" name="memb_band" readonly />
     <input type="hidden" class="form-control" id="memb_phone" name="memb_phone" readonly />
     <div class="form-group">
         <label class="control-label " for="calendar">Tithe Period</label>

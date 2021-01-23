@@ -45,7 +45,7 @@ Class Model
     }
     public function fetch_Categories($other_payment_sub){
         $data = null;
-        if ($other_payment_sub === 'R1-0001'){
+        if ($other_payment_sub === 'Band_Savings'){
             $query = "SELECT * FROM band_tbl";
             if ($sql = $this->conn->query($query)){
                 while ( $row = mysqli_fetch_assoc($sql)){
