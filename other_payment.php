@@ -283,6 +283,32 @@ require_once 'includes/header.php';
         }
         
     });
+    $(document).on("change", "#other_payment_sub", function(e){
+        //e.preventDefault();
+        try{
+            let other_payment_sub = $("#other_payment_sub").val();
+            $.ajax({
+                url: "auto.php",
+                type: "post",
+                dataType: "json",
+                data: {
+                    other_payment_sub: other_payment_sub
+                },
+                success: function(data){
+                    let category = "";
+                    category ="<option value='select'>Select Category</option>";
+
+                    $.each(data, function (key,value) {
+                        category += "<option value="+ value.Name +">"+ value.Name +"</option>";
+                    });
+                    $("#category").html(category);
+                }
+            });
+        } catch (e) {
+
+        }
+
+    });
 </script>
 <script type="text/javascript">
 

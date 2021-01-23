@@ -27,7 +27,7 @@ $qnt = array('1kqty'=>'1kqty_bal', '5hqty'=>'5hqty_bal', '2hqty'=>'2hqty_bal', '
         $rows = $model->fetch_band();
     ?>
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label class="control-label " for="other_payment">Other Payment</label>
             <select class="form-control" id="other_payment" name="other_payment" >
                 <option>Select Other Payment</option>
@@ -38,20 +38,20 @@ $qnt = array('1kqty'=>'1kqty_bal', '5hqty'=>'5hqty_bal', '2hqty'=>'2hqty_bal', '
                     <?php endforeach; endif; ?>
             </select>
         </div>
-        <h3 id="test"></h3>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label class="control-label " for="other_payment_sub">Other Payment Sub</label>
             <select class="form-control" id="other_payment_sub" name="other_payment_sub" >
-                <option>Select Other Payment</option>
-                <?php
-                if (!empty($rows)):
-                    foreach ($rows as $row):?>
-                        <option value="<?= $row['ChartID'];?>"> <?= $row['ChartName'];?> </option>
-                    <?php endforeach; endif; ?>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label " for="category">All Categories</label>
+            <select class="form-control" id="category" name="category" >
+
             </select>
         </div>
     </div>
-
+    <br />
+    <hr class="style13" />
     <div class="form-group">
         <label for="memb_search">Search Member *</label>
         <input type="text" name="typeahead" id="typeahead" class="typeahead tt-query"
