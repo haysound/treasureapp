@@ -2,10 +2,15 @@
 
 class Model
 {
-    private $server   = "localhost";
-    private $username = "DevUser";
-    private $password = "root@2020";
-    private $db       = "churchadmin";
+    // private $server   = "localhost";
+    // private $username = "DevUser";
+    // private $password = "root@2020";
+    // private $db       = "churchadmin";
+
+    private $server   = "rimonobdc.com";
+    private $username = "rimonobd_treasus";
+    private $password = "$@J,bcPtM@if";
+    private $db       = "rimonobd_mainchurchtreasuryapp";
 
     // private $server   = "localhost";
     // private $username = "root";
